@@ -3,6 +3,8 @@ module.exports = {
     lintOnSave: false,
     // 执行 npm run build 统一配置路径
     publicPath: './',
+    //不打包map文件
+    productionSourceMap: false,
     //配置服务器地址
     devServer: {
         proxy: {

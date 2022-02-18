@@ -25,7 +25,8 @@ requests.interceptors.response.use((res) => {
     nprogress.done();
     return res.data;
 }, (error) => {
-    return Promise.reject(new Error('faile'))
+    nprogress.done();
+    return Promise.reject(new Error('网络请求失败'))
 });
 
 export default requests;

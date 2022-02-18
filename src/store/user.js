@@ -27,7 +27,7 @@ const actions = {
             //这里将ok：true返回给注册页
             return "ok";
         } else {
-            return Promise.reject(new Error("faile"));
+            return Promise.reject(new Error("账号已存在"));
         }
     },
     //登录
@@ -40,7 +40,7 @@ const actions = {
             // setToken(result.data.token)
             return "ok"
         } else {
-            return Promise.reject(new Error("faile"));
+            return Promise.reject(new Error("账号密码错误"));
         }
     },
     //退出登录

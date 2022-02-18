@@ -3,5 +3,5 @@ import Mock from 'mockjs';
 import login from './login.json'
 
 //两个参数：请求地址，请求数据
-Mock.mock("/mock/login",{code:200,data:login});
+Mock.mock("/mock/login",{code:201,data:login});
 
