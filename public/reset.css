@@ -141,3 +141,7 @@ a:link:hover {
 	clear: both;
 	visibility: hidden;
 }
+
+.el-textarea__inner{
+	height: 25vh;
+}

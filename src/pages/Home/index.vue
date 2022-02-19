@@ -12,7 +12,7 @@
 			<!-- 贴子区 -->
 			<article class="post-place">
 				<!-- 每条贴子信息 -->
-				<div class="post bg-light">
+				<div class="post bg-light" v-for="post in posts.posts" :key="post.pId">
 					<!-- 左侧图片 -->
 					<div class="post-img">
 						<router-link to="/detail">
@@ -25,25 +25,21 @@
 					</div>
 					<!-- 右侧标题发帖日期，点赞数，评论数，贴子内容 -->
 					<div class="post-msg">
-						<router-link to="/detail" class="post-title"
-							>贴子标题踢踢踢踢踢踢踢踢踢踢踢踢大概这么长</router-link
-						>
+						<router-link to="/detail" class="post-title">{{
+							post.pname
+						}}</router-link>
 						<div class="meta">
-							<span class="likes">点赞数666</span>
-							<span class="comments">评论数666</span>
-							<span class="time">发布于 2022/2/17</span>
+							<span class="likes">点赞数{{ post.praise }}</span>
+							<span class="comments">评论数{{ post.postReply.length }}</span>
+							<span class="time"
+								>发布于 {{ moment(post.pmodified).format("YYYY/MM/DD") }}</span
+							>
 						</div>
 						<div class="content">
-							这里是内容Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Natus eos esse enim eius ipsam consequuntur, autem doloremque,
-							atque sapiente nisi, molestiae temporibus ratione pariatur
-							repudiandae quia dolorem qui nesciunt delectus?
+							{{ post.pcontent }}
 						</div>
 					</div>
 				</div>
-				<div class="post bg-light"></div>
-				<div class="post bg-light"></div>
-				<div class="post bg-light"></div>
 			</article>
 			<!-- 侧边栏 -->
 			<aside class="aside">
@@ -52,25 +48,90 @@
 				<div class="aside-tips"></div>
 				<div class="aside-tips"></div>
 			</aside>
+			<!-- 发布贴子 -->
+			<div class="post-one-post" :class="{ display: isPost }">
+				<label for="title">贴子标题</label><i class="el-icon-edit"></i>
+				<i class="el-icon-close" @click="isPost = false"></i>
+				<el-input
+					type="text"
+					placeholder="请输入内容"
+					v-model="pname"
+					maxlength="10"
+					show-word-limit
+					id="title"
+				>
+				</el-input>
+				<div style="margin: 20px 0"></div>
+				<label for="content">贴子内容</label>
+				<el-input
+					type="textarea"
+					placeholder="请输入内容"
+					v-model="pcontent"
+					maxlength="200"
+					show-word-limit
+					id="content"
+					required
+				>
+				</el-input>
+				<el-button type="success" round class="submit-post" @click="submitPost"
+					>发布</el-button
+				>
+			</div>
 		</main>
 		<footer class="foot mt-5 mb-5">
 			<!-- 页码 -->
 			<el-button round class="more">加载更多</el-button>
 		</footer>
+		<el-button
+			type="primary"
+			icon="el-icon-edit"
+			circle
+			class="post-my-post"
+			@click="isPost = !isPost"
+		></el-button>
 	</div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import moment from "moment";
 export default {
 	name: "Home",
 	components: {},
 	data() {
 		return {
-			title: "",
+			pname: "",
+			pcontent: "",
+			isPost: false,
 		};
 	},
+	methods: {
+		moment,
+		getPost() {
+			this.$store.dispatch("getPosts");
+		},
+		async submitPost() {
+			const { pname, pcontent } = this;
+			if (pname == "" && pcontent == "") {
+				alert("请输入内容");
+			} else {
+				try {
+					await this.$store.dispatch("postPosts", { pname, pcontent });
+					this.isPost = false
+					this.getPost()
+					alert('发布成功')
+				} catch (error) {
+					alert(error.message)
+				}
+				
+			}
+		},
+	},
 	mounted() {
-		this.$store.dispatch("getPost");
+		this.getPost();
+	},
+	computed: {
+		...mapState(["posts"]),
 	},
 };
 </script>
@@ -131,7 +192,6 @@ export default {
 		background-color: #eee;
 		.post-place {
 			width: 75%;
-
 			@media screen and (max-width: 900px) {
 				width: 100%;
 			}
@@ -179,9 +239,8 @@ export default {
 						.comments {
 							margin-right: 1em;
 						}
-						
 					}
-					.content{
+					.content {
 						margin-top: 0.3rem;
 					}
 				}
@@ -209,6 +268,30 @@ export default {
 				}
 			}
 		}
+		.post-one-post {
+			display: none;
+			height: 50vh;
+			width: 50vw;
+			position: fixed;
+			top: 25vh;
+			left: 25vw;
+			background-color: #eee;
+			border-radius: 5em;
+			padding: 3em;
+			transition: all 1s;
+			.el-icon-close {
+				float: right;
+				position: relative;
+				top: -1em;
+				right: 1em;
+				font-size: 20px;
+				cursor: pointer;
+			}
+			.submit-post {
+				float: right;
+				margin-top: 10px;
+			}
+		}
 	}
 	.foot {
 		display: flex;
@@ -217,6 +300,15 @@ export default {
 	a {
 		color: #aaa;
 		text-decoration: none;
+	}
+	.post-my-post {
+		position: fixed;
+		bottom: 20vh;
+		right: 20vh;
+		padding: 15px;
+	}
+	.display {
+		display: block !important;
 	}
 }
 </style>

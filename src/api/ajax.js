@@ -7,7 +7,7 @@ import store from "../store";
 //二次封装
 const requests = axios.create({
     //基础路径自带/api
-    baseURL: "/api",
+    baseURL: "",
     //请求超过20s则超时
     timeout: 20000,
 });

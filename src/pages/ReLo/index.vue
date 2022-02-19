@@ -37,8 +37,8 @@
 					<div class="signin" :class="{ nodisplay: !isActive }">
 						<h1>Sign In</h1>
 						<form class="more-padding" autocomplete="off">
-							<input type="text" placeholder="Username" v-model="username"/>
-							<input type="password" placeholder="Password" v-model="password"/>
+							<input type="text" placeholder="Username" v-model="username" required/>
+							<input type="password" placeholder="Password" v-model="password" required/>
 							<div class="checkbox">
 								<input type="checkbox" id="remember" /><label for="remember"
 									>Remember Me</label
