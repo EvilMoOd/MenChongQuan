@@ -7,29 +7,21 @@
 					<div class="signup" :class="{ nodisplay: isActive }">
 						<h1>Register</h1>
 						<form autocomplete="off">
-							<input
-								type="text"
-								placeholder="Username"
-								pattern="[a-zA-Z0-9_]{4,16}$"
-								required
-								v-model="userNameR"
-							/>
-							<input type="email" placeholder="Email" required v-model="email"/>
+							<input type="text" placeholder="Username" v-model="userNameR" />
+							<input type="email" placeholder="Email" v-model="email" />
 							<input
 								type="password"
 								placeholder="Password"
-								pattern="[0-9]{4,16}$"
-								required
 								v-model="passwordR"
 							/>
 							<input
 								type="password"
 								placeholder="Confirm Password"
-								pattern="[0-9]{4,16}$"
-								required
 								v-model="confirmPassword"
 							/>
-							<button class="button submit" @click.prevent="register">Create Account</button>
+							<button class="button submit" @click="register">
+								Create Account
+							</button>
 						</form>
 					</div>
 
@@ -37,14 +29,20 @@
 					<div class="signin" :class="{ nodisplay: !isActive }">
 						<h1>Sign In</h1>
 						<form class="more-padding" autocomplete="off">
-							<input type="text" placeholder="Username" v-model="username" required/>
-							<input type="password" placeholder="Password" v-model="password" required/>
+							<input type="text" placeholder="Username" v-model="username" />
+							<input
+								type="password"
+								placeholder="Password"
+								v-model="password"
+							/>
 							<div class="checkbox">
 								<input type="checkbox" id="remember" /><label for="remember"
 									>Remember Me</label
 								>
 							</div>
-							<button class="buttom sumbit" @click.prevent="login">Login</button>
+							<button class="buttom sumbit" @click.prevent="login">
+								Login
+							</button>
 						</form>
 					</div>
 				</div>
@@ -96,27 +94,52 @@ export default {
 		signIn() {
 			this.isActive = false;
 		},
-		async register(){
-			try{
-				const username = this.userNameR;
-				const email = this.email;
-				const password = this.passwordR;
-				const confirmPassword =this.confirmPassword;
-				(username && email && password==confirmPassword) && await this.$store.dispatch('userRegister',{username,email,password})
-				this.$router.push('/home')
-			}catch(error){
-				
+		async register() {
+			const username = this.userNameR;
+			const email = this.email;
+			const password = this.passwordR;
+			const confirmPassword = this.confirmPassword;
+			const userNamePattern = /^[a-zA-Z0-9_-]{4,16}$/;
+			const emailPattern =
+				/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (password != confirmPassword) {
+				alert("密码与确认密码不一致");
+			} else if (!userNamePattern.test(username)) {
+				alert("用户名由4到16位字母、数字组成");
+			} else if (!emailPattern.test(email)) {
+				alert("邮箱格式不正确");
+			} else if (!password) {
+				alert("密码不能为空");
+			} else {
+				try {
+					await this.$store.dispatch("userRegister", {
+						username,
+						email,
+						password,
+					});
+					alert("注册成功");
+					this.isActive = true;
+				} catch (error) {
+					alert(error.message);
+				}
 			}
 		},
-		async login(){
-			try{
-				const {username,password} = this;
-				(username&&password) && await this.$store.dispatch('userLogin',{username,password})
-				this.$router.push("/home");
-			}catch(error){
-				alert(error.message);
+		async login() {
+			const { username, password } = this;
+			if (!username) {
+				alert("用户名还没输入呢");
+			} else if (!password) {
+				alert("密码，密码，密码！！！");
+			} else {
+				try {
+					await this.$store.dispatch("userLogin", { username, password });
+					alert("登录成功");
+					this.$router.push("/home");
+				} catch (error) {
+					alert(error.message);
+				}
 			}
-		}
+		},
 	},
 };
 </script>
@@ -125,7 +148,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400|Lora");
 
 .body {
-	background-image: url('~@/assets/images/zhen.jpg');
+	background-image: url("~@/assets/images/zhen.jpg");
 	background-size: cover;
 	height: 100vh;
 	display: flex;

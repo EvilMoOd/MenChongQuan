@@ -43,10 +43,13 @@
 			</article>
 			<!-- 侧边栏 -->
 			<aside class="aside">
-				<div class="aside-tips"></div>
-				<div class="aside-tips"></div>
-				<div class="aside-tips"></div>
-				<div class="aside-tips"></div>
+				<div class="aside-tips bg-light">
+					<h5>公告</h5>
+					<span>小破站正在施工中。。。</span>
+				</div>
+				<div class="aside-tips bg-light">
+					这块是破站的信息,统计本栈的贴子数以及其他东西,（施工中。。。）
+				</div>
 			</aside>
 			<!-- 发布贴子 -->
 			<div class="post-one-post" :class="{ display: isPost }">
@@ -117,13 +120,12 @@ export default {
 			} else {
 				try {
 					await this.$store.dispatch("postPosts", { pname, pcontent });
-					this.isPost = false
-					this.getPost()
-					alert('发布成功')
+					this.isPost = false;
+					this.getPost();
+					alert("发布成功");
 				} catch (error) {
-					alert(error.message)
+					alert(error.message);
 				}
-				
 			}
 		},
 	},
@@ -253,14 +255,14 @@ export default {
 		.aside {
 			width: 25%;
 			padding-left: 15px;
+
 			@media screen and (max-width: 900px) {
 				display: none;
 			}
 			.aside-tips {
-				height: 200px;
 				width: 95%;
-				margin-top: 2rem;
-				background-color: #ccc;
+				margin-top: 1rem;
+				padding: 1rem 1.2rem;
 				border-radius: 10px;
 				&:hover {
 					box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.06);
