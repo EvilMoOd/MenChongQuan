@@ -1,0 +1,24 @@
+{
+    "code": "200",
+    "data": {
+        "pname": "国足牛逼",
+        "pid": 1,
+        "floor": [
+            {
+                "rcontent": "reploy",
+                "rid": 1,
+                "rtime": 1645236463000,
+                "uid": 1,
+                "uname": "admin"
+            },
+            {
+                "rcontent": "牛牛牛，国足牛逼！！！！",
+                "rid": 2,
+                "rtime": 1645236463000,
+                "uid": 2,
+                "uname": "木"
+            }
+        ]
+    },
+    "ok": "true"
+}

@@ -4,7 +4,7 @@ const state = {
 }
 const mutations = {
     GETPOSTS(state, data) {
-        state.posts = data.data
+        state.posts = data
     }
 }
 const actions = {
@@ -12,6 +12,7 @@ const actions = {
         let result = await reqGetPosts()
         if (result.code == 200) {
             //这里将ok：true返回给注册页
+            console.log(result);
             commit('GETPOSTS', result.data)
         }
     },

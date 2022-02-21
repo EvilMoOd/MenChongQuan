@@ -5,10 +5,10 @@ Vue.use(Vuex);
 
 import user from './user'
 import posts from './Posts';
+import detail from './detail';
 
 export default new Vuex.Store({
     modules: {
-        user,
-        posts
+        user, posts, detail
     }
 });

@@ -1,10 +1,6 @@
 {
-    "code":200,
-    "message":"成功",
-    "data":{
-    "nickName":"Administrator",
-    "name":"Admin",
-    "token":"90aa16f24d04c7d882051412f9ec45b"
-    },
-    "ok":true
+    "code": 200,
+    "data": {
+        "token": "90aa16f24d04c7d882051412f9ec45b"
+    }
 }

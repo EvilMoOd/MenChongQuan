@@ -8,12 +8,13 @@
 		>
 			<el-menu-item index="/home">首页</el-menu-item>
 			<!-- 登录成功之后记得写个if去掉 -->
-			<el-menu-item index="/ReLo">登录/注册</el-menu-item>
-			<el-submenu index="/person">
-				<template slot="title">个人主页</template>
+			<el-menu-item index="/ReLo" v-if="!token">登录/注册</el-menu-item>
+			<el-submenu index="/person" v-if="token">
+				<template slot="title">个人</template>
 				<el-menu-item index="/Person"> 我的主页 </el-menu-item>
 				<el-menu-item index="/Person">我的贴子</el-menu-item>
 				<el-menu-item index="/Person">我的评论</el-menu-item>
+				<el-menu-item index="/login" @click="loginOut">退出登录</el-menu-item>
 			</el-submenu>
 			<el-menu-item index="/message">消息中心</el-menu-item>
 		</el-menu>
@@ -34,6 +35,14 @@ export default {
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
+		loginOut() {
+			this.$store.dispatch("loginOut");
+		},
+	},
+	computed: {
+		token() {
+			return this.$store.state.user.token;
+		},
 	},
 };
 </script>
@@ -47,7 +56,7 @@ export default {
 	width: 100%;
 	animation: headerNoOpacity 1s;
 }
-a{
+a {
 	text-decoration: none;
 }
 </style>

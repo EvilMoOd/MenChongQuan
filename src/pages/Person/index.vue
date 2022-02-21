@@ -21,7 +21,6 @@
 						Officia, eveniet earum illum pariatur qui soluta aliquid asperiores.
 					</div>
 				</div>
-				<main class=""></main>
 			</div>
 		</header>
 		<main>

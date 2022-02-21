@@ -2,6 +2,7 @@ import axios from "axios";
 //进度条
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
+import store from "../store";
 
 //二次封装
 const requests = axios.create({
@@ -12,6 +13,9 @@ const requests = axios.create({
 });
 //请求和响应拦截器
 requests.interceptors.request.use((config) => {
+    if (store.state.user.token) {
+        config.headers.token = store.state.user.token
+    }
     nprogress.start();
     return config;
 });
@@ -21,7 +25,7 @@ requests.interceptors.response.use((res) => {
     return res.data;
 }, (error) => {
     nprogress.done();
-    return Promise.reject(new Error('网络请求失败'))
+    alert('服务器响应失败')
 });
 
 export default requests;

@@ -26,7 +26,7 @@ export default [
         component: ReLo,
     },
     {
-        path: "/detail",
+        path: "/detail/:pid",
         component: Detail,
     }
 ]

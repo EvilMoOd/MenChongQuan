@@ -12,10 +12,10 @@
 			<!-- 贴子区 -->
 			<article class="post-place">
 				<!-- 每条贴子信息 -->
-				<div class="post bg-light" v-for="post in posts.posts" :key="post.pId">
+				<div class="post bg-light" v-for="post in posts.posts" :key="post.pid">
 					<!-- 左侧图片 -->
 					<div class="post-img">
-						<router-link to="/detail">
+						<router-link :to="`/detail/${post.pid}`">
 							<img
 								src="@/../public/images/postImg1.jpg"
 								alt=""
@@ -25,7 +25,7 @@
 					</div>
 					<!-- 右侧标题发帖日期，点赞数，评论数，贴子内容 -->
 					<div class="post-msg">
-						<router-link to="/detail" class="post-title">{{
+						<router-link :to="`/detail/${post.pid}`" class="post-title">{{
 							post.pname
 						}}</router-link>
 						<div class="meta">
@@ -106,6 +106,8 @@ export default {
 			pname: "",
 			pcontent: "",
 			isPost: false,
+			tid: 1,
+			token: localStorage.getItem("TOKEN"),
 		};
 	},
 	methods: {
@@ -114,12 +116,17 @@ export default {
 			this.$store.dispatch("getPosts");
 		},
 		async submitPost() {
-			const { pname, pcontent } = this;
-			if (pname == "" && pcontent == "") {
+			const { pname, pcontent, tid, token } = this;
+			if (!token) {
+				alert("登录后再发帖");
+				this.$router.push("/ReLo");
+			} else if (pname == "") {
+				alert("请输入标题");
+			} else if (pcontent == "") {
 				alert("请输入内容");
 			} else {
 				try {
-					await this.$store.dispatch("postPosts", { pname, pcontent });
+					await this.$store.dispatch("postPosts", { pname, pcontent, tid });
 					this.isPost = false;
 					this.getPost();
 					alert("发布成功");
@@ -129,11 +136,12 @@ export default {
 			}
 		},
 	},
-	mounted() {
-		this.getPost();
-	},
 	computed: {
 		...mapState(["posts"]),
+	},
+
+	mounted() {
+		this.getPost();
 	},
 };
 </script>
@@ -272,15 +280,15 @@ export default {
 		}
 		.post-one-post {
 			display: none;
-			height: 50vh;
 			width: 50vw;
 			position: fixed;
 			top: 25vh;
 			left: 25vw;
-			background-color: #eee;
+			background-color: rgba($color: #eee, $alpha: 0.9);
 			border-radius: 5em;
 			padding: 3em;
 			transition: all 1s;
+
 			.el-icon-close {
 				float: right;
 				position: relative;

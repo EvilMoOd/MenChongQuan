@@ -135,6 +135,8 @@ export default {
 					await this.$store.dispatch("userLogin", { username, password });
 					alert("登录成功");
 					this.$router.push("/home");
+					// this.$router.go(0);
+					location.reload()
 				} catch (error) {
 					alert(error.message);
 				}

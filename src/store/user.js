@@ -16,6 +16,7 @@ const mutations = {
         state.token = "";
         state.userInfo = {};
         localStorage.removeItem("TOKEN")
+        location.reload()
     }
 }
 const actions = {
@@ -35,9 +36,9 @@ const actions = {
         let result = await reqUserLogin(data);
         if (result.code == 200) {
             //vueX存储token
-            // commit("USERLOGIN", result.data.token);
+            commit("USERLOGIN", result.data.token);
             // //存到localStorage
-            // setToken(result.data.token)
+            localStorage.setItem("TOKEN", result.data.token)
             return "ok"
         } else {
             return Promise.reject(new Error("账号密码错误"));
@@ -46,12 +47,7 @@ const actions = {
     //退出登录
     async loginOut({ commit }) {
         let result = await reqLoginOut();
-        if (result.code == 200) {
-            commit("LOGINOUT")
-            return "ok"
-        } else {
-            return Promise.reject(new Error("faile"));
-        }
+        commit("LOGINOUT")
     },
     //请求用户信息
     async getUserInfo({ commit }) {
