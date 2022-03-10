@@ -85,7 +85,7 @@ onMounted(() => {
 	height: 20em;
 	width: 1000px;
 	margin: auto;
-	background-image: url("../../public/images/postImg3.jpeg");
+	background-image: url("../assets/images/cat1.jpg");
 	background-size: cover;
 	display: flex;
 	justify-content: center;

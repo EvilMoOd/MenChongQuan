@@ -130,7 +130,7 @@ async function login() {
 					<p class="desc">Pick your perfect <span>bouquet</span></p>
 					<img
 						class="flower smaller"
-						src="https://hbimg.huabanimg.com/c09305167a883e60179a45374df73252304001359acca-W3qbYm_fw658/format/webp"
+						src="../assets/images/f1.webp"
 					/>
 					<p class="account">Have an account?</p>
 					<button class="button" @click="signIn">sign In</button>
@@ -141,7 +141,7 @@ async function login() {
 					<p class="desc">Pick your perfect <span>bouquet</span></p>
 					<img
 						class="flower"
-						src="https://hbimg.huabanimg.com/b28be92c8198975a74ad656eba00b352c9b9e589819af-lDXUAS_fw658/format/webp"
+						src="../assets/images/f2.webp"
 					/>
 					<p class="account">Don't have an account?</p>
 					<button class="button" @click="signUp">Sign Up</button>
@@ -155,7 +155,7 @@ async function login() {
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400|Lora");
 
 .body {
-	background-image: url("../assets/images/zhen.jpg");
+	background-image: url("../assets/images/dog.jpg");
 	background-size: cover;
 	height: 100vh;
 	display: flex;

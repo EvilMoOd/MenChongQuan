@@ -55,7 +55,7 @@ onMounted(() => {
 					<div class="post-img">
 						<router-link :to="`/detail/${post.pid}`">
 							<img
-								src="../../public/images/postImg1.jpg"
+								src="../assets/images/cat2.png"
 								alt=""
 								class="postImg"
 							/>
@@ -86,7 +86,9 @@ onMounted(() => {
 					<span>小破站正在施工中。。。</span>
 				</div>
 				<div class="aside-tips bg-light">
-					这块是破站的信息,统计本栈的贴子数以及其他东西,（施工中。。。）
+					欢迎来到萌宠圈
+					<p>在这里你可以与其他喜欢萌宠的伙伴一起讨论交流
+					分享与宠物们的快乐与喜悦时光</p>
 				</div>
 			</aside>
 			<!-- 发布贴子 -->
@@ -154,7 +156,7 @@ onMounted(() => {
 	background-size: cover;
 	.full_page {
 		height: 100vh;
-		background-image: url("../assets/images/wlop.jpg");
+		background-image: url("../assets/images/cat.jpg");
 		background-size: cover;
 		display: flex;
 		justify-content: center;

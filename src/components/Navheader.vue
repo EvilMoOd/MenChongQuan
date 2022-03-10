@@ -35,7 +35,7 @@ onMounted(() => store.getUserInfo());
 				<el-menu-item index="/Person">我的评论</el-menu-item>
 				<el-menu-item index="/login" @click="loginOut">退出登录</el-menu-item>
 			</el-sub-menu>
-			<el-menu-item index="/message">消息中心</el-menu-item>
+			<el-menu-item index="/message" v-if="token">消息中心</el-menu-item>
 		</el-menu>
 </template>
 
