@@ -44,7 +44,6 @@ export const userStore = defineStore("user", {
 		//请求用户信息
 		async getUserInfo() {
 			let result = await reqUserInfo();
-			console.log(result);
 			if (result.code == 200) {
 				this.userInfo = result.data;
 			}

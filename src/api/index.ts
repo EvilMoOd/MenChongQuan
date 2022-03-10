@@ -1,5 +1,4 @@
 import requests from "./ajax";
-import mockRequests from './mockAjax'
 
 //url待后端写入
 
@@ -17,19 +16,3 @@ export const reqGetPosts = () => requests({ url: '/post/getAllPosts', method: 'g
 export const reqGetPostDetail = (pid) => requests({ url: `/detail/${pid}`, method: 'get' })
 //评论贴子，盖楼
 export const reqPublishComment = (msg) => requests({ url: `/detail/comment`, method: 'post', data: msg })
-
-//mock
-// 注册
-// export const reqUserRegister = (data: any) => mockRequests({ url: '/signup', method: 'post', data })
-// //登录
-// export const reqUserLogin = (data: any) => mockRequests({ url: '/login', method: 'post', data })
-//获取用户信息
-// export const reqUserInfo = () => mockRequests({ url: '/getUserInfo', method: 'get' })
-// 发布贴子
-// export const reqPost = (message: any) => mockRequests({ url: '/posts', method: 'post', data: message })
-//获取首页贴子
-// export const reqGetPosts = () => mockRequests({ url: '/getAllPosts', method: 'get' })
-//获取贴子详情页
-// export const reqGetPostDetail = (pid: any) => mockRequests({ url: `/detail/${pid}`, method: 'get' })
-//评论贴子，盖楼
-// export const reqPublishComment = (msg: any) => mockRequests({ url: `/detail/comment`, method: 'post', data: msg })

@@ -5,24 +5,24 @@ import { useRouter } from "vue-router";
 import { postsStore } from "../store/posts";
 import { Edit } from "@element-plus/icons-vue";
 
-name: "Home";
-
 const store = postsStore();
 const router = useRouter();
 
-let pname = ref("");
-let pcontent = ref("");
+let title = ref("");
+let content = ref("");
 let isPost = ref(false);
 //时间戳转换
 moment;
 
 async function submitPost() {
+	const pname = title.value
+	const pcontent = content.value
 	if (!localStorage.getItem("TOKEN")) {
 		alert("登录后再发帖");
 		router.push("/ReLo");
-	} else if (!pname.value) {
+	} else if (!title.value) {
 		alert("请输入标题");
-	} else if (!pcontent.value) {
+	} else if (!content.value) {
 		alert("请输入内容");
 	} else {
 		try {
@@ -44,7 +44,7 @@ onMounted(() => {
 	<div class="page">
 		<!-- 壁纸 -->
 		<header class="full_page">
-			<h1>二次元栈</h1>
+			<h1>萌宠圈🐇</h1>
 		</header>
 		<main class="layout">
 			<!-- 贴子区 -->
@@ -70,7 +70,7 @@ onMounted(() => {
 							<span class="likes">点赞数{{ post.praise }}</span>
 							<span class="comments">评论数{{ post.postReply.length }}</span>
 							<span class="time"
-								>发布于 {{ moment(post.pmodified).format("YYYY/MM/DD") }}</span
+								>发布于 {{ moment(post.pcreate).format("YYYY/MM/DD") }}</span
 							>
 						</div>
 						<div class="content">
@@ -109,7 +109,7 @@ onMounted(() => {
 				<el-input
 					type="text"
 					placeholder="请输入内容"
-					v-model="pname"
+					v-model="title"
 					maxlength="10"
 					show-word-limit
 					id="title"
@@ -120,7 +120,7 @@ onMounted(() => {
 				<el-input
 					type="textarea"
 					placeholder="请输入内容"
-					v-model="pcontent"
+					v-model="content"
 					maxlength="200"
 					show-word-limit
 					id="content"
@@ -205,6 +205,7 @@ onMounted(() => {
 		max-width: 1200px;
 		.post-place {
 			width: 75%;
+			overflow: hidden;
 			@media screen and (max-width: 900px) {
 				width: 100%;
 			}
@@ -220,6 +221,9 @@ onMounted(() => {
 					height: 100%;
 					width: 45%;
 					overflow: hidden;
+					@media screen and (max-width: 650px) {
+						display: none;
+					}
 					.postImg {
 						height: 100%;
 						width: 100%;
@@ -231,9 +235,11 @@ onMounted(() => {
 				}
 				.post-msg {
 					display: inline-block;
-					overflow: hidden;
 					padding: 0 40px;
 					width: 55%;
+					@media screen and (max-width: 650px) {
+						width: 100%;
+					}
 					.post-title {
 						display: inline-block;
 						transition: all 0.5s;

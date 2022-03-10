@@ -11,8 +11,6 @@ import 'element-plus/dist/index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
 
-import './mock/mockServe'
-
 const pinia = createPinia()
 
 createApp(App).use(ElementPlus).use(router).use(pinia).mount('#app')

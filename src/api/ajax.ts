@@ -7,7 +7,7 @@ const token = localStorage.getItem("TOKEN");
 //二次封装
 const requests = axios.create({
 	//基础路径自带/api
-	baseURL: "",
+	baseURL: "http://127.0.0.1:4523/mock/619934",
 	//请求超过20s则超时
 	timeout: 20000,
 });

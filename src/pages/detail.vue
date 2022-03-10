@@ -9,7 +9,7 @@ const route = useRoute();
 const router = useRouter();
 const store = detailStore();
 
-let rcontent = ref("");
+let content = ref("");
 moment;
 
 function getPostDetail() {
@@ -17,13 +17,14 @@ function getPostDetail() {
 	store.getPostDetail(route.params.pid);
 }
 async function submitComment() {
+	const pid = route.params.pid;
+	const rcontent = content.value
 	if (!localStorage.getItem("TOKEN")) {
 		alert("请登录后再发布评论");
 		router.push("/ReLo");
-	} else if (!rcontent.value) {
+	} else if (!content.value) {
 		alert("评论不能为空");
 	} else {
-		const pid = route.params.pid;
 		try {
 			await store.publishComment({ rcontent, pid });
 			location.reload();
@@ -46,7 +47,7 @@ onMounted(() => {
 		<main class="layout">
 			<article
 				class="post"
-				v-for="posts in store.postDetail.floor"
+				v-for="(posts,index) in store.postDetail.floor"
 				:key="posts.rid"
 			>
 				<div class="user">
@@ -55,7 +56,7 @@ onMounted(() => {
 				<section>
 					<div class="username">{{ posts.uname }}</div>
 					<div class="user-msg">
-						<span class="floor">第{{ posts.rid }}楼</span>
+						<span class="floor">第{{ index+1 }}楼</span>
 						<span class="time">{{
 							moment(posts.rtime).format("YYYY/MM/DD/h:mm:ss a")
 						}}</span>
@@ -72,7 +73,7 @@ onMounted(() => {
 			<div class="block">
 				<el-avatar :size="50"></el-avatar>
 			</div>
-			<input type="text" class="comment" v-model="rcontent" />
+			<input type="text" class="comment" v-model="content" />
 			<button class="submit" @click="submitComment">发布评论</button>
 		</footer>
 		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
