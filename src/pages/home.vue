@@ -68,7 +68,7 @@ onMounted(() => {
 						}}</router-link>
 						<div class="meta">
 							<span class="likes">点赞数{{ post.praise }}</span>
-							<span class="comments">评论数{{ post.postReply.length }}</span>
+							<span class="comments">评论数{{ post.postReply }}</span>
 							<span class="time"
 								>发布于 {{ moment(post.pcreate).format("YYYY/MM/DD") }}</span
 							>

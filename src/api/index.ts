@@ -8,6 +8,7 @@ export const reqUserRegister = (data) => requests({ url: '/signup', method: 'pos
 export const reqUserLogin = (data) => requests({ url: '/login', method: 'post', data })
 // 带着token拿用户信息
 export const reqUserInfo = () => requests({ url: '/user/detail', method: 'get' })
+
 //发布贴子
 export const reqPost = (message) => requests({ url: '/post/publish', method: 'post', data: message })
 //获取首页贴子

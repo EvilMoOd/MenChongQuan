@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted } from "vue";
 import { userStore } from "../store/user";
-name:"NavHeader"
+
 const store = userStore();
 
 function loginOut() {

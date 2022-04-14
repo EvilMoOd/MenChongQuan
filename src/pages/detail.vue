@@ -3,7 +3,6 @@ import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { detailStore } from "../store/detail";
 import moment from "moment";
-name: "detail";
 
 const route = useRoute();
 const router = useRouter();
