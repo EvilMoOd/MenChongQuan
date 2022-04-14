@@ -10,7 +10,7 @@
 			<!-- 登录成功之后记得写个if去掉 -->
 			<el-menu-item index="/ReLo" v-if="!token">登录/注册</el-menu-item>
 			<el-submenu index="/person" v-if="token">
-				<template slot="title">个人</template>
+				<template slot="title">{{ username }}</template>
 				<el-menu-item index="/Person"> 我的主页 </el-menu-item>
 				<el-menu-item index="/Person">我的贴子</el-menu-item>
 				<el-menu-item index="/Person">我的评论</el-menu-item>
@@ -28,7 +28,6 @@ export default {
 	data() {
 		return {
 			activeIndex: "1",
-			activeIndex2: "1",
 		};
 	},
 	methods: {
@@ -43,6 +42,12 @@ export default {
 		token() {
 			return this.$store.state.user.token;
 		},
+		username() {
+			return this.$store.state.user.userInfo.username;
+		},
+	},
+	mounted() {
+		this.$store.dispatch("getUserInfo");
 	},
 };
 </script>

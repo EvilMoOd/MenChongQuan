@@ -5,6 +5,7 @@ import ReLo from '@/pages/ReLo'
 import Detail from '@/pages/Detail'
 
 export default [
+    //重定向
     {
         path: "*",
         redirect: "/home",

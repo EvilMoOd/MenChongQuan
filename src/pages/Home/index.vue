@@ -4,10 +4,6 @@
 		<header class="full_page">
 			<h1>二次元栈</h1>
 		</header>
-		<br />
-		<br />
-		<br />
-		<br />
 		<main class="layout">
 			<!-- 贴子区 -->
 			<article class="post-place">
@@ -81,10 +77,11 @@
 				>
 			</div>
 		</main>
-		<footer class="foot mt-5 mb-5">
+		<footer class="foot mt-5">
 			<!-- 页码 -->
 			<el-button round class="more">加载更多</el-button>
 		</footer>
+		<br><br><br><br><br><br><br>
 		<el-button
 			type="primary"
 			icon="el-icon-edit"
@@ -148,6 +145,9 @@ export default {
 
 <style lang="scss" scoped>
 .page {
+	background-image: url("~@/assets/images/bg.jpg");
+	background-attachment: fixed;
+	background-size: cover;
 	.full_page {
 		height: 100vh;
 		background-image: url("~@/assets/images/wlop.jpg");
@@ -199,7 +199,6 @@ export default {
 		margin: 0 auto;
 		padding: 2rem 15px;
 		max-width: 1200px;
-		background-color: #eee;
 		.post-place {
 			width: 75%;
 			@media screen and (max-width: 900px) {
@@ -212,6 +211,7 @@ export default {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
+				box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.06);
 				.post-img {
 					height: 100%;
 					width: 45%;
@@ -255,7 +255,7 @@ export default {
 					}
 				}
 				&:hover {
-					box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.06);
+					box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.15);
 					transition: all 0.3s;
 				}
 			}
@@ -272,8 +272,9 @@ export default {
 				margin-top: 1rem;
 				padding: 1rem 1.2rem;
 				border-radius: 10px;
+				box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.06);
 				&:hover {
-					box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.06);
+					box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.15);
 					transition: all 0.3s;
 				}
 			}

@@ -7,7 +7,7 @@ const state = {
 }
 const mutations = {
     USERLOGIN(state, token) {
-        state.token = token
+        state.token = token;
     },
     GETUSERINFO(state, userInfo) {
         state.userInfo = userInfo;
@@ -46,12 +46,13 @@ const actions = {
     },
     //退出登录
     async loginOut({ commit }) {
-        let result = await reqLoginOut();
+        // let result = await reqLoginOut();
         commit("LOGINOUT")
     },
     //请求用户信息
     async getUserInfo({ commit }) {
         let result = await reqUserInfo();
+        console.log(result);
         if (result.code == 200) {
             commit("GETUSERINFO", result.data);
         }
